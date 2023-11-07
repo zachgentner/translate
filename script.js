@@ -44,6 +44,14 @@ function fadeIn(element) {
 
 async function translateWord(element) {
     await fadeOut(element);
-    element.innerHTML = dict[element.innerText];
+    const word = element.innerText;
+    let translation = dict[element.innerText.toLowerCase()];
+
+    // If the first letter of the word being translated is capitalized, capitalize the first letter of the translation.
+    if (/[A-Z]/.test(word[0])) {
+        translation = translation[0].toUpperCase() + translation.slice(1, translation.length);
+    }
+
+    element.innerHTML = translation;
     // fadeIn(element);
 }
